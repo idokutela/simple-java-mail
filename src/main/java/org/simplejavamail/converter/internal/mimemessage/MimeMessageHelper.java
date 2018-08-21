@@ -1,7 +1,5 @@
 package org.simplejavamail.converter.internal.mimemessage;
 
-import net.markenwerk.utils.mail.dkim.DkimMessage;
-import net.markenwerk.utils.mail.dkim.DkimSigner;
 import org.simplejavamail.email.AttachmentResource;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.Recipient;
@@ -30,7 +28,7 @@ import static java.lang.String.format;
 import static org.simplejavamail.internal.util.MiscUtil.valueNullOrEmpty;
 
 /**
- * Helper class that produces and populates a mime messages. Deals with javax.mail RFC MimeMessage stuff, as well as DKIM signing.
+ * Helper class that produces and populates a mime messages. Deals with javax.mail RFC MimeMessage stuff.
  */
 public class MimeMessageHelper {
 	
@@ -274,23 +272,5 @@ public class MimeMessageHelper {
 			resourceName = resourceName.replace(extension, "");
 		}
 		return resourceName;
-	}
-	
-	/**
-	 * Primes the {@link MimeMessage} instance for signing with DKIM. The signing itself is performed by {@link DkimMessage} and {@link DkimSigner}
-	 * during the physical sending of the message.
-	 *
-	 * @param messageToSign                 The message to be signed when sent.
-	 * @param emailContainingSigningDetails The {@link Email} that contains the relevant signing information
-	 *
-	 * @return The original mime message wrapped in a new one that performs signing when sent.
-	 */
-	public static MimeMessage signMessageWithDKIM(final MimeMessage messageToSign, final Email emailContainingSigningDetails) {
-		return MiscUtil.<IDKIMSigner>loadLibraryClass(
-				"net.markenwerk.utils.mail.dkim.DkimSigner",
-				"org.simplejavamail.converter.internal.mimemessage.DKIMSigner",
-				MimeMessageParseException.ERROR_SIGNING_DKIM_LIBRARY_MISSING,
-				MimeMessageParseException.ERROR_LOADING_DKIM_LIBRARY)
-				.signMessageWithDKIM(messageToSign, emailContainingSigningDetails);
 	}
 }

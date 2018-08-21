@@ -390,12 +390,6 @@ public class EmailBuilder {
 			if (email.getHeaders() != null) {
 				builder.withHeaders(email.getHeaders());
 			}
-			if (email.getDkimPrivateKeyFile() != null) {
-				builder.signWithDomainKey(email.getDkimPrivateKeyFile(), email.getDkimSigningDomain(), email.getDkimSelector());
-			}
-			if (email.getDkimPrivateKeyInputStream() != null) {
-				builder.signWithDomainKey(email.getDkimPrivateKeyInputStream(), email.getDkimSigningDomain(), email.getDkimSelector());
-			}
 			if (email.getDispositionNotificationTo() != null) {
 				builder.withDispositionNotificationTo(email.getDispositionNotificationTo());
 			}

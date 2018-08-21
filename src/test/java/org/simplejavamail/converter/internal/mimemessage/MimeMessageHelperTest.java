@@ -97,49 +97,4 @@ public class MimeMessageHelperTest {
 		return ds;
 	}
 	
-	@Test
-	public void testSignMessageWithDKIM_ShouldFailSpecificallyBecauseItWillTryToSign() throws IOException {
-		final Email email = EmailHelper.createDummyEmailBuilder(true, false, false)
-				.signWithDomainKey("dummykey", "moo.com", "selector")
-				.buildEmail();
-		
-		assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-			@Override
-			public void call() throws Throwable {
-				EmailConverter.emailToMimeMessage(email);
-			}
-		})
-				.hasMessage(MimeMessageParseException.ERROR_SIGNING_DKIM_INVALID_DOMAINKEY);
-	}
-	
-	@Test
-	public void testSignMessageWithDKIM_ShouldFailSpecificallyBecauseDKIMLibraryIsMissing() throws IOException {
-		final Email email = EmailHelper.createDummyEmailBuilder(true, false, false)
-				.signWithDomainKey("dummykey", "moo.com", "selector")
-				.buildEmail();
-		
-		PowerMockito.mockStatic(MiscUtil.class);
-		BDDMockito.given(MiscUtil.loadLibraryClass(any(String.class), any(String.class), any(String.class), any(String.class))).willCallRealMethod();
-		BDDMockito.given(MiscUtil.classAvailable("net.markenwerk.utils.mail.dkim.DkimSigner")).willReturn(false);
-		
-		assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-			@Override
-			public void call() {
-				EmailConverter.emailToMimeMessage(email);
-			}
-		})
-				.hasMessage(MimeMessageParseException.ERROR_SIGNING_DKIM_LIBRARY_MISSING);
-		
-		PowerMockito.mockStatic(MiscUtil.class);
-		BDDMockito.given(MiscUtil.loadLibraryClass(any(String.class), any(String.class), any(String.class), any(String.class))).willCallRealMethod();
-		BDDMockito.given(MiscUtil.classAvailable("net.markenwerk.utils.mail.dkim.DkimSigner")).willCallRealMethod();
-		
-		assertThatThrownBy(new ThrowableAssert.ThrowingCallable() {
-			@Override
-			public void call() throws Throwable {
-				EmailConverter.emailToMimeMessage(email);
-			}
-		})
-				.hasMessage(MimeMessageParseException.ERROR_SIGNING_DKIM_INVALID_DOMAINKEY);
-	}
 }

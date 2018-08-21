@@ -1,0 +1,82 @@
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/MimeMessageHelper.java:				"net.markenwerk.utils.mail.dkim.DkimSigner",
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/MimeMessageParseException.java:	static final String ERROR_SIGNING_DKIM_LIBRARY_MISSING = "DKIM library not found, make sure it is on the classpath (https://github.com/markenwerk/java-utils-mail-dkim)";
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:import net.markenwerk.utils.mail.dkim.Canonicalization;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:import net.markenwerk.utils.mail.dkim.DkimMessage;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:import net.markenwerk.utils.mail.dkim.DkimSigner;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:import net.markenwerk.utils.mail.dkim.SigningAlgorithm;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			final DkimSigner dkimSigner;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:				dkimSigner = new DkimSigner(emailContainingSigningDetails.getDkimSigningDomain(), emailContainingSigningDetails.getDkimSelector(),
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:				dkimSigner = new DkimSigner(emailContainingSigningDetails.getDkimSigningDomain(), emailContainingSigningDetails.getDkimSelector(),
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setIdentity(emailContainingSigningDetails.getFromRecipient().getAddress());
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setHeaderCanonicalization(Canonicalization.SIMPLE);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setBodyCanonicalization(Canonicalization.RELAXED);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setSigningAlgorithm(SigningAlgorithm.SHA256_WITH_RSA);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setLengthParam(true);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			dkimSigner.setZParam(false);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/converter/internal/mimemessage/DKIMSigner.java:			return new DkimMessage(messageToSign, dkimSigner);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	private File dkimPrivateKeyFile;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	private InputStream dkimPrivateKeyInputStream;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	private String dkimSigningDomain;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	private String dkimSelector;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 * dkimPrivateKey} data.
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final byte[] dkimPrivateKey, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		checkNonEmptyArgument(dkimPrivateKey, "dkimPrivateKey");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return signWithDomainKey(new ByteArrayInputStream(dkimPrivateKey), signingDomain, dkimSelector);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 * dkimPrivateKey} string converted to UTF_8 byte array.
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final String dkimPrivateKey, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		checkNonEmptyArgument(dkimPrivateKey, "dkimPrivateKey");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return signWithDomainKey(new ByteArrayInputStream(dkimPrivateKey.getBytes(UTF_8)), signingDomain, dkimSelector);
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 *     <li>https://postmarkapp.com/guides/dkim</li>
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 *     <li>https://github.com/markenwerk/java-utils-mail-dkim</li>
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 *     <li>http://www.gettingemaildelivered.com/dkim-explained-how-to-set-up-and-use-domainkeys-identified-mail-effectively</li>
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 * @param dkimPrivateKeyInputStream De key content used to sign for the sending party.
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 * @param dkimSelector              Additional domain specifier.
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final InputStream dkimPrivateKeyInputStream, @Nonnull final String signingDomain,
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:													@Nonnull final String dkimSelector) {
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimPrivateKeyInputStream = checkNonEmptyArgument(dkimPrivateKeyInputStream, "dkimPrivateKeyInputStream");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSigningDomain = checkNonEmptyArgument(signingDomain, "dkimSigningDomain");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSelector = checkNonEmptyArgument(dkimSelector, "dkimSelector");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final File dkimPrivateKeyFile, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimPrivateKeyFile = checkNonEmptyArgument(dkimPrivateKeyFile, "dkimPrivateKeyFile");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSigningDomain = checkNonEmptyArgument(signingDomain, "dkimSigningDomain");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSelector = checkNonEmptyArgument(dkimSelector, "dkimSelector");
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:	 * Resets all dkim properties to empty.
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimPrivateKeyFile = null;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimPrivateKeyInputStream = null;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSigningDomain = null;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		this.dkimSelector = null;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return dkimPrivateKeyFile;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return dkimPrivateKeyInputStream;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return dkimSigningDomain;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/EmailPopulatingBuilder.java:		return dkimSelector;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:	private InputStream dkimPrivateKeyInputStream;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:	private File dkimPrivateKeyFile; // supported separately, so we don't have to do resource management ourselves for the InputStream
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:	private String dkimSigningDomain;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:	private String dkimSelector;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimPrivateKeyFile = builder.getDkimPrivateKeyFile();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimSigningDomain = builder.getDkimSigningDomain();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimSelector = builder.getDkimSelector();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimPrivateKeyInputStream = builder.getDkimPrivateKeyInputStream();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimSigningDomain = builder.getDkimSigningDomain();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:			this.dkimSelector = builder.getDkimSelector();
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:		if (!valueNullOrEmpty(dkimSigningDomain)) {
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:					",\n\t\tdkimSelector=" + dkimSelector +
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:					",\n\t\tdkimSigningDomain=" + dkimSigningDomain;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:		return dkimPrivateKeyInputStream;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:		return dkimPrivateKeyFile;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:		return dkimSigningDomain;
+./#dkimoccurrences.txt#:./src/main/java/org/simplejavamail/email/Email.java:		return dkimSelector;
+./README.md:# Simple Java Mail no DKIM #
+./README.md:** NOTE: This is a modified version of [simplejavamail](http://www.simplejavamail.org/) that removes all DKIM support. This removes any (L)GPL dependency to simplejavamail apart from javamail itself, which is also distributed under CDDL. This also only includes the java library, not the webapp frontend. **
+./README.md:Simple Java Mail is the simplest to use lightweight mailing library for Java, while being able to send complex emails including **[authenticated socks proxy](http://www.simplejavamail.org/#section-proxy)**(!), **[attachments](http://www.simplejavamail.org/#section-attachments)**, **[embedded images](http://www.simplejavamail.org/#section-embedding)**, **[custom headers and properties](http://www.simplejavamail.org/#section-custom-headers)**, **[robust address validation](http://www.simplejavamail.org/#section-email-validation)**, **[build pattern](http://www.simplejavamail.org/#section-builder-api)** and even **[DKIM signing](http://www.simplejavamail.org/#section-dkim)** and **[external configuration files](http://www.simplejavamail.org/#section-config-properties)** with **property overriding**, **[Spring support](http://www.simplejavamail.org/#section-spring-support)** and **[Email conversion](http://www.simplejavamail.org/#section-converting)** tools. Just send your emails without dealing with [RFC's](http://www.simplejavamail.org/#/rfc).
+./README.md:- [#130](https://github.com/bbottema/simple-java-mail/issues/130) java.lang.ClassNotFoundException: net.markenwerk.utils.mail.dkim.DkimMessage
+./README.md:Solves the issue of missing optional class DKIM even when not used 
+./README.md:- [#120](https://github.com/bbottema/simple-java-mail/issues/120) The DKIM library has been made an optional proper Maven dependency (not packaged along anymore)
+./README.md:- [#56](https://github.com/bbottema/simple-java-mail/issues/56): bug fix for IOException when signing dkim with a File reference
+./README.md:**Major feature: DKIM support**!
+./README.md:- [#33](https://github.com/bbottema/simple-java-mail/issues/33): Added support for DKIM domain key signing
+./RELEASE.txt:All docs there apply, except anything with DKIM is removed.
+./RELEASE.txt:    <artifactId>simple-java-mail-no-dkim</artifactId>
+./RELEASE.txt:A fork of simple-java-mail 5.0.3 with DKIM support removed (and consequently, the dependency on net.markenwerk::utils-mail-dkim. The webapp frontend is also excluded.
+Binary file ./.git/objects/pack/pack-1ce5b565bcc45150df57e14e7dc1847b4a9d87bd.pack matches
+Binary file ./.git/index matches

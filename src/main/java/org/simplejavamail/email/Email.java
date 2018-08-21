@@ -117,28 +117,6 @@ public class Email {
 	private final MimeMessage emailToForward;
 	
 	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 */
-	private InputStream dkimPrivateKeyInputStream;
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	private File dkimPrivateKeyFile; // supported separately, so we don't have to do resource management ourselves for the InputStream
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	private String dkimSigningDomain;
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	private String dkimSelector;
-	
-	/**
 	 * Simply transfers everything from {@link EmailPopulatingBuilder} to this Email instance.
 	 *
 	 * @see EmailPopulatingBuilder#buildEmail()
@@ -184,15 +162,6 @@ public class Email {
 			}
 		}
 		
-		if (builder.getDkimPrivateKeyFile() != null) {
-			this.dkimPrivateKeyFile = builder.getDkimPrivateKeyFile();
-			this.dkimSigningDomain = builder.getDkimSigningDomain();
-			this.dkimSelector = builder.getDkimSelector();
-		} else if (builder.getDkimPrivateKeyInputStream() != null) {
-			this.dkimPrivateKeyInputStream = builder.getDkimPrivateKeyInputStream();
-			this.dkimSigningDomain = builder.getDkimSigningDomain();
-			this.dkimSelector = builder.getDkimSelector();
-		}
 	}
 	
 	/**
@@ -229,11 +198,7 @@ public class Email {
 				",\n\ttextCalendar='" + textCalendar + '\'' +
 				",\n\tsubject='" + subject + '\'' +
 				",\n\trecipients=" + recipients;
-		if (!valueNullOrEmpty(dkimSigningDomain)) {
-			s += ",\n\tapplyDKIMSignature=" + true +
-					",\n\t\tdkimSelector=" + dkimSelector +
-					",\n\t\tdkimSigningDomain=" + dkimSigningDomain;
-		}
+
 		if (useDispositionNotificationTo) {
 			s += ",\n\tuseDispositionNotificationTo=" + true +
 					",\n\t\tdispositionNotificationTo=" + dispositionNotificationTo;
@@ -391,33 +356,4 @@ public class Email {
 		return headers;
 	}
 	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 */
-	public InputStream getDkimPrivateKeyInputStream() {
-		return dkimPrivateKeyInputStream;
-	}
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	public File getDkimPrivateKeyFile() {
-		return dkimPrivateKeyFile;
-	}
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	public String getDkimSigningDomain() {
-		return dkimSigningDomain;
-	}
-	
-	/**
-	 * @see EmailPopulatingBuilder#signWithDomainKey(InputStream, String, String)
-	 * @see EmailPopulatingBuilder#signWithDomainKey(File, String, String)
-	 */
-	public String getDkimSelector() {
-		return dkimSelector;
-	}
 }

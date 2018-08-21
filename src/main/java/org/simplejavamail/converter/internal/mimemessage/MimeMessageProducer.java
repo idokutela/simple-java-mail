@@ -9,12 +9,11 @@ import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import static org.simplejavamail.converter.internal.mimemessage.MimeMessageHelper.signMessageWithDKIM;
 import static org.simplejavamail.internal.util.MiscUtil.checkArgumentNotEmpty;
 import static org.simplejavamail.internal.util.MiscUtil.valueNullOrEmpty;
 
 /**
- * Helper class that produces and populates a mime messages. Deals with javax.mail RFC MimeMessage stuff, as well as DKIM signing.
+ * Helper class that produces and populates a mime messages. Deals with javax.mail RFC MimeMessage stuff.
  * <p>
  * Some more <a href="https://blogs.technet.microsoft.com/exchange/2011/04/21/mixed-ing-it-up-multipartmixed-messages-and-you/">helpful reading
  * material</a>.
@@ -56,10 +55,6 @@ abstract class MimeMessageProducer {
 		MimeMessageHelper.setHeaders(email, message);
 		message.setSentDate(new Date());
 
-		if (!valueNullOrEmpty(email.getDkimSigningDomain())) {
-			return signMessageWithDKIM(message, email);
-		}
-		
 		return message;
 	}
 	

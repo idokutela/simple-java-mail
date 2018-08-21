@@ -120,28 +120,6 @@ public class EmailPopulatingBuilder {
 	private final Map<String, String> headers;
 	
 	/**
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	private File dkimPrivateKeyFile;
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 */
-	private InputStream dkimPrivateKeyInputStream;
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	private String dkimSigningDomain;
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	private String dkimSelector;
-	
-	/**
 	 * @see #withDispositionNotificationTo()
 	 * @see #withDispositionNotificationTo(Recipient)
 	 */
@@ -1240,61 +1218,6 @@ public class EmailPopulatingBuilder {
 	}
 	
 	/**
-	 * Delegates to {@link #signWithDomainKey(InputStream, String, String)} with a {@link ByteArrayInputStream} wrapped around the prodived {@code
-	 * dkimPrivateKey} data.
-	 */
-	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final byte[] dkimPrivateKey, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
-		checkNonEmptyArgument(dkimPrivateKey, "dkimPrivateKey");
-		return signWithDomainKey(new ByteArrayInputStream(dkimPrivateKey), signingDomain, dkimSelector);
-	}
-	
-	/**
-	 * Delegates to {@link #signWithDomainKey(InputStream, String, String)} with a {@link ByteArrayInputStream} wrapped around the prodived {@code
-	 * dkimPrivateKey} string converted to UTF_8 byte array.
-	 */
-	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final String dkimPrivateKey, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
-		checkNonEmptyArgument(dkimPrivateKey, "dkimPrivateKey");
-		return signWithDomainKey(new ByteArrayInputStream(dkimPrivateKey.getBytes(UTF_8)), signingDomain, dkimSelector);
-	}
-	
-	/**
-	 * Primes this email for signing with a DKIM domain key. Actual signing is done when sending using a <code>Mailer</code>.
-	 * <p>
-	 * Also see:
-	 * <pre><ul>
-	 *     <li>https://postmarkapp.com/guides/dkim</li>
-	 *     <li>https://github.com/markenwerk/java-utils-mail-dkim</li>
-	 *     <li>http://www.gettingemaildelivered.com/dkim-explained-how-to-set-up-and-use-domainkeys-identified-mail-effectively</li>
-	 *     <li>https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail</li>
-	 * </ul></pre>
-	 *
-	 * @param dkimPrivateKeyInputStream De key content used to sign for the sending party.
-	 * @param signingDomain             The domain being authorized to send.
-	 * @param dkimSelector              Additional domain specifier.
-	 *
-	 * @see #signWithDomainKey(byte[], String, String)
-	 * @see #signWithDomainKey(String, String, String)
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final InputStream dkimPrivateKeyInputStream, @Nonnull final String signingDomain,
-													@Nonnull final String dkimSelector) {
-		this.dkimPrivateKeyInputStream = checkNonEmptyArgument(dkimPrivateKeyInputStream, "dkimPrivateKeyInputStream");
-		this.dkimSigningDomain = checkNonEmptyArgument(signingDomain, "dkimSigningDomain");
-		this.dkimSelector = checkNonEmptyArgument(dkimSelector, "dkimSelector");
-		return this;
-	}
-	
-	/**
-	 * As {@link #signWithDomainKey(InputStream, String, String)}, but with a File reference that is later read as {@code InputStream}.
-	 */
-	public EmailPopulatingBuilder signWithDomainKey(@Nonnull final File dkimPrivateKeyFile, @Nonnull final String signingDomain, @Nonnull final String dkimSelector) {
-		this.dkimPrivateKeyFile = checkNonEmptyArgument(dkimPrivateKeyFile, "dkimPrivateKeyFile");
-		this.dkimSigningDomain = checkNonEmptyArgument(signingDomain, "dkimSigningDomain");
-		this.dkimSelector = checkNonEmptyArgument(dkimSelector, "dkimSelector");
-		return this;
-	}
-	
-	/**
 	 * Indicates that we want to use the NPM flag {@link #dispositionNotificationTo}. The actual address will default to the {@link #replyToRecipient}
 	 * first if set or else {@link #fromRecipient} (the final address is determined when sending this email).
 	 *
@@ -1504,17 +1427,6 @@ public class EmailPopulatingBuilder {
 	}
 	
 	/**
-	 * Resets all dkim properties to empty.
-	 */
-	public EmailPopulatingBuilder clearDkim() {
-		this.dkimPrivateKeyFile = null;
-		this.dkimPrivateKeyInputStream = null;
-		this.dkimSigningDomain = null;
-		this.dkimSelector = null;
-		return this;
-	}
-	
-	/**
 	 * Resets {@link #dispositionNotificationTo} to empty.
 	 */
 	public EmailPopulatingBuilder clearDispositionNotificationTo() {
@@ -1625,36 +1537,6 @@ public class EmailPopulatingBuilder {
 	 */
 	public Map<String, String> getHeaders() {
 		return new HashMap<>(headers);
-	}
-	
-	/**
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	public File getDkimPrivateKeyFile() {
-		return dkimPrivateKeyFile;
-	}
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 */
-	public InputStream getDkimPrivateKeyInputStream() {
-		return dkimPrivateKeyInputStream;
-	}
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	public String getDkimSigningDomain() {
-		return dkimSigningDomain;
-	}
-	
-	/**
-	 * @see #signWithDomainKey(InputStream, String, String)
-	 * @see #signWithDomainKey(File, String, String)
-	 */
-	public String getDkimSelector() {
-		return dkimSelector;
 	}
 	
 	/**

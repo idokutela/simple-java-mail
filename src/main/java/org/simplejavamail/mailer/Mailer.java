@@ -32,8 +32,8 @@ import static org.simplejavamail.mailer.config.TransportStrategy.findStrategyFor
 
 /**
  * Mailing tool created exclusively using {@link MailerBuilder}, aimed for simplicity for sending e-mails of any complexity. This includes e-mails
- * with plain text and/or html content, embedded images and separate attachments, SMTP, SMTPS / SSL and SMTP + SSL, custom Session object, DKIM domain
- * signing and even authenticated SOCKS proxy support and threaded batch processing.
+ * with plain text and/or html content, embedded images and separate attachments, SMTP, SMTPS / SSL and SMTP + SSL, custom Session object
+ * and even authenticated SOCKS proxy support and threaded batch processing.
  * <p>
  * This mailing tool abstracts the javax.mail API to a higher level easy to use API. This tool works with {@link Email} instances but can also convert
  * traditional {@link MimeMessage} objects to and from {@link Email} object.
@@ -349,13 +349,6 @@ public class Mailer {
 		if (value != null && (value.contains("\n") || value.contains("\r") || value.contains("%0A"))) {
 			throw new MailerException(format(MailerException.INJECTION_SUSPECTED, valueLabel, value));
 		}
-	}
-	
-	/**
-	 * Refer to {@link MimeMessageHelper#signMessageWithDKIM(MimeMessage, Email)}
-	 */
-	public static MimeMessage signMessageWithDKIM(final MimeMessage messageToSign, final Email emailContainingSigningDetails) {
-		return MimeMessageHelper.signMessageWithDKIM(messageToSign, emailContainingSigningDetails);
 	}
 	
 	/**

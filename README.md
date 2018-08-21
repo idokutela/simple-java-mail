@@ -2,7 +2,7 @@
 
 # Simple Java Mail no DKIM #
 
-** NOTE: This is a modified version of [simplejavamail](http://www.simplejavamail.org/) that removes all DKIM support. This removes any (L)GPL dependency to simplejavamail apart from javamail itself, which is also distributed under CDDL. This also only includes the java library, not the webapp frontend. **
+**NOTE: This is a modified version of [simplejavamail](http://www.simplejavamail.org/) that removes all DKIM support. This removes any (L)GPL dependency to simplejavamail apart from javamail itself, which is also distributed under CDDL. This also only includes the java library, not the webapp frontend.**
 
 Simple Java Mail is the simplest to use lightweight mailing library for Java, while being able to send complex emails including **[authenticated socks proxy](http://www.simplejavamail.org/#section-proxy)**(!), **[attachments](http://www.simplejavamail.org/#section-attachments)**, **[embedded images](http://www.simplejavamail.org/#section-embedding)**, **[custom headers and properties](http://www.simplejavamail.org/#section-custom-headers)**, **[robust address validation](http://www.simplejavamail.org/#section-email-validation)**, **[build pattern](http://www.simplejavamail.org/#section-builder-api)** and even **[DKIM signing](http://www.simplejavamail.org/#section-dkim)** and **[external configuration files](http://www.simplejavamail.org/#section-config-properties)** with **property overriding**, **[Spring support](http://www.simplejavamail.org/#section-spring-support)** and **[Email conversion](http://www.simplejavamail.org/#section-converting)** tools. Just send your emails without dealing with [RFC's](http://www.simplejavamail.org/#/rfc).
 
